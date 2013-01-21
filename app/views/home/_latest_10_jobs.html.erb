@@ -1,0 +1,22 @@
+<h4>
+	Searching jobs for <%= session[:key]%>
+</h4>
+<table class="table table-bordered">
+	<% @latest_jobs.each do |job|%> 
+	<tr>
+		<td>
+			<span class="label label-success">
+				<%= job.city.name%>
+			</span>
+		</td>
+		<td>
+			<%= link_to job.title, "http://seek.com.au#{job.advert_link}", :target => "_blank"%>
+			<br />
+			<p class="muted"><%= job.posted_date%></p>
+		</td>
+		<td>
+			<%= salary_scale(job) %>
+		</td>
+	</tr>
+	<% end %>
+</table>

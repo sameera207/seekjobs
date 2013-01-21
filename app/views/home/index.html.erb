@@ -1,0 +1,13 @@
+<div class="row" id="navigation">
+	<div class="span9">
+		<% @categories.each do |category| %>
+		 <%= link_to search_categories(category.name), home_search_path + "?key=#{category.name}", :remote => true %>
+		<% end %> 
+    </div>
+</div>
+<br />
+<div id="job_list">
+	<%= render :partial => 'latest_10_jobs'%>
+</div>
+
+

@@ -1,0 +1,2 @@
+$("#dash").html("<%= raw escape_javascript(render(:partial => 'chart')) %>").show("slide", { direction: "right" }, 1000);
+$("#job_list").html("<%= raw escape_javascript(render(:partial => 'latest_10_jobs')) %>").show("slide", { direction: "right" }, 1000);
