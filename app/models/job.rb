@@ -16,7 +16,7 @@ class Job < ActiveRecord::Base
   }
   
   scope :between_last_month, lambda {
-    {:conditions => {:created_at => ((Date.today - 1.month)..(Date.today))}}
+    {:conditions => {:created_at => (((Date.today - 1.month) - 1)..(Date.today + 1))}}
   }
   
   scope :latest_10, lambda {
