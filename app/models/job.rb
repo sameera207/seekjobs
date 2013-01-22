@@ -23,6 +23,10 @@ class Job < ActiveRecord::Base
     {:limit => 10}
   }
   
+  scope :order, lambda {
+    {:order => "id desc"}
+  }
+  
   before_create :assign_city
   
   def self.jobs_by_category(category)
@@ -41,5 +45,11 @@ class Job < ActiveRecord::Base
   def self.latest_10_jobs(category)
     self.by_category(category).latest_10.between_last_month
   end
+  
+  def self.date_range
+    jobs = Job.order
+    [jobs.last, jobs.first]
+  end
+
 
 end

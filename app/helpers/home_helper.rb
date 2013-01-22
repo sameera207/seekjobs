@@ -7,6 +7,10 @@ module HomeHelper
     raw "#{amount(job.pay_low)} - #{amount(job.pay_heigh)}"
   end
   
+  def date_range
+    Job.date_range
+  end
+  
   private
   def amount pay
     number_to_currency(pay) if pay != 0
