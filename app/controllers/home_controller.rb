@@ -7,6 +7,12 @@ class HomeController < ApplicationController
   def index
     session[:key] ||= Category.first.name
     latest_10_jobs
+    @jobs = Job.jobs_by_category(session[:key])
+    @h = LazyHighCharts::HighChart.new('pie') do |f|
+       f.options[:chart][:defaultSeriesType] = "pie"
+       f.options[:title][:text] = "Searching jobs for #{session[:key]}"
+       f.series(:name=> session[:key], :data=> @jobs)
+    end
   end
   
   def search
@@ -29,5 +35,7 @@ class HomeController < ApplicationController
   def latest_10_jobs
     @latest_jobs = Job.latest_10_jobs(session[:key])
   end
+  
+  
   
 end

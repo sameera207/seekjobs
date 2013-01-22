@@ -15,6 +15,10 @@ class Job < ActiveRecord::Base
       :conditions => "categories.name = '#{category}'"}  
   }
   
+  scope :between_last_month, lambda {
+    {:conditions => {:created_at => ((Date.today - 1.month)..(Date.today))}}
+  }
+  
   scope :latest_10, lambda {
     {:limit => 10}
   }
@@ -23,7 +27,7 @@ class Job < ActiveRecord::Base
   
   def self.jobs_by_category(category)
     job_list = []
-    jobs = Job.by_category(category).count(:group => 'city_id', :include => :city)
+    jobs = Job.by_category(category).between_last_month.count(:group => 'city_id', :include => :city)
     jobs.each do |job|
       job_list << [City.find(job[0]).name, job[1]]    
     end
@@ -35,7 +39,7 @@ class Job < ActiveRecord::Base
   end
   
   def self.latest_10_jobs(category)
-    self.by_category(category).latest_10
+    self.by_category(category).latest_10.between_last_month
   end
 
 end
