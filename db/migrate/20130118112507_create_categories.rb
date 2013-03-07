@@ -3,7 +3,7 @@ class CreateCategories < ActiveRecord::Migration
     create_table :categories do |t|
       t.string :name
     end
-    categories = %w{Ruby Java PHP}
+    categories = %w{Ruby+on+rails Java PHP}
     categories.each do |cat|
       Category.create(:name => cat)
     end

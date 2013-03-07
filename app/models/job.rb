@@ -12,7 +12,8 @@ class Job < ActiveRecord::Base
   scope :by_category, lambda {|category|
     {
       :joins => :category,
-      :conditions => "categories.name = '#{category}'"}  
+      :conditions => "categories.name = '#{category}'",
+      :order => "posted_date desc"}  
   }
   
   scope :between_last_month, lambda {
